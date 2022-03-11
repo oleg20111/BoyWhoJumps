@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // Ban on double or more jumps
         if(Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -25,12 +26,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Chatacter reactions to the ground or other objects
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
         }
+
+        // Stop game if character ran into an obstacle
         else if(collision.gameObject.CompareTag("Obstacle"))
         {
             gameOver = true;
